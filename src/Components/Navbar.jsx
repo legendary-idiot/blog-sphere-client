@@ -1,12 +1,12 @@
 import { useContext } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
-// import { AuthContext } from "../Providers/AuthProvider";
 import toast from "react-hot-toast";
+import { AuthContext } from "../Providers/AuthProvider";
 
 const Navbar = () => {
-  //   const { user, logOutUser } = useContext(AuthContext);
-  const user = {};
+  const { user, logOutUser } = useContext(AuthContext);
+
   const links = (
     <>
       <li>
@@ -90,13 +90,13 @@ const Navbar = () => {
                 className="size-10 object-cover border rounded-full border-gray-400"
               />
               <button
-                // onClick={() =>
-                //   logOutUser()
-                //     .then(() => toast.success("Logged Out Successfully!"))
-                //     .catch((error) =>
-                //       toast.error("Sorry, something went wrong!")
-                //     )
-                // }
+                onClick={() =>
+                  logOutUser()
+                    .then(() => toast.success("Logged Out Successfully!"))
+                    .catch((error) =>
+                      toast.error("Sorry, something went wrong!")
+                    )
+                }
                 className="btn btn-primary"
               >
                 Log Out

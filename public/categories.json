@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Technology",
+    "slug": "technology",
+    "icon": "fa-solid fa-microchip"
+  },
+  {
+    "name": "Travel",
+    "slug": "travel",
+    "icon": "fa-solid fa-plane-departure"
+  },
+  {
+    "name": "Sport",
+    "slug": "sport",
+    "icon": "fa-solid fa-futbol"
+  },
+  {
+    "name": "Business",
+    "slug": "business",
+    "icon": "fa-solid fa-briefcase"
+  },
+  {
+    "name": "Management",
+    "slug": "management",
+    "icon": "fa-solid fa-chart-simple"
+  },
+  {
+    "name": "Trends",
+    "slug": "trends",
+    "icon": "fa-solid fa-arrow-trend-up"
+  },
+  {
+    "name": "Startups",
+    "slug": "startups",
+    "icon": "fa-solid fa-person-chalkboard"
+  },
+  {
+    "name": "News",
+    "slug": "news",
+    "icon": "fa-solid fa-newspaper"
+  }
+]

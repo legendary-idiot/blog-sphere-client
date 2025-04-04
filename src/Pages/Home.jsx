@@ -1,11 +1,14 @@
 import Banner from "../Components/Banner";
+import TopicTags from "../Components/TopicTags";
+import Newsletter from "./../Components/Newsletter";
 
 const Home = () => {
   return (
     <div>
       <Banner />
-      <h3>News</h3>
-      <h3>Newsletter</h3>
+      <TopicTags />
+      <h3>All News</h3>
+      <Newsletter />
     </div>
   );
 };
