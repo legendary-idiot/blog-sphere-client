@@ -1,16 +1,23 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
+import { AuthContext } from "./../Providers/AuthProvider";
+import toast from "react-hot-toast";
 
 const AllBlogs = () => {
   const blogs = useLoaderData();
+  const { user } = useContext(AuthContext);
 
   const handleWishlist = (blogId) => {
+    if (!user) {
+      toast.error("Please login to add to wishlist");
+      return;
+    }
     fetch("http://localhost:3000/wishlists", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ blogId }),
+      body: JSON.stringify({ blogId, email: user.email }),
     })
       .then((response) => response.json())
       .then((data) => console.log(data))

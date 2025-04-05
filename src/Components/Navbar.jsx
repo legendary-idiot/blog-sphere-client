@@ -21,6 +21,13 @@ const Navbar = () => {
       </li>
       {user && (
         <li>
+          <NavLink to="/my-blogs" className="font-medium text-lg">
+            My Blogs
+          </NavLink>
+        </li>
+      )}
+      {user && (
+        <li>
           <NavLink to="/add-blog" className="font-medium text-lg">
             Add Blog
           </NavLink>

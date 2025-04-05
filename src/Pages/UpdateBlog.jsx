@@ -1,12 +1,10 @@
-import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { AuthContext } from "./../Providers/AuthProvider";
 
-const AddBlog = () => {
-  const { user } = useContext(AuthContext);
+const UpdateBlog = () => {
+  const data = useLoaderData();
   const navigate = useNavigate();
-
   const formHandler = (e) => {
     e.preventDefault();
     const postCover = e.target.postCover.value;
@@ -30,8 +28,8 @@ const AddBlog = () => {
       username,
     };
 
-    fetch("http://localhost:3000/blogs", {
-      method: "POST",
+    fetch(`http://localhost:3000/blogs/${data._id}`, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
@@ -41,7 +39,7 @@ const AddBlog = () => {
       .then((data) => {
         e.target.reset();
         Swal.fire({
-          title: "Post Added Successfully!",
+          title: "Post Updated Successfully!",
           icon: "success",
         });
         navigate("/all-blogs");
@@ -69,6 +67,7 @@ const AddBlog = () => {
             <input
               type="text"
               name="postTitle"
+              defaultValue={data?.postTitle}
               placeholder="Enter Post Title"
               className="input input-bordered w-full focus-within:outline-none"
               required
@@ -81,6 +80,7 @@ const AddBlog = () => {
             <input
               type="text"
               name="postCover"
+              defaultValue={data?.postCover}
               placeholder="Enter Post Cover Image URL"
               className="input input-bordered w-full focus-within:outline-none"
               required
@@ -91,7 +91,7 @@ const AddBlog = () => {
               <span className="label-text">Category</span>
             </label>
             <select
-              defaultValue="Technology"
+              defaultValue={data?.category}
               name="category"
               className="select focus-within:outline-none w-full"
             >
@@ -112,6 +112,7 @@ const AddBlog = () => {
             <textarea
               name="postDescription"
               className="textarea h-[600px] w-full focus-within:outline-none"
+              defaultValue={data?.postDescription}
               placeholder="Write Your Post Here"
             ></textarea>
           </div>
@@ -123,10 +124,10 @@ const AddBlog = () => {
               type="email"
               name="email"
               placeholder="Email"
-              defaultValue={user?.email}
+              defaultValue={data?.email}
               className="input input-bordered w-full focus-within:outline-none"
               required
-              disabled={!!user}
+              disabled
             />
           </div>
           <div className="form-control space-y-2">
@@ -137,14 +138,14 @@ const AddBlog = () => {
               type="text"
               name="username"
               placeholder="Username"
-              defaultValue={user?.displayName}
+              defaultValue={data?.username}
               className="input input-bordered w-full focus-within:outline-none"
               required
-              disabled={!!user}
+              disabled
             />
           </div>
           <div className="form-control">
-            <button className="btn btn-primary w-full">Submit Post</button>
+            <button className="btn btn-primary w-full">Update Post</button>
           </div>
         </form>
       </div>
@@ -152,4 +153,4 @@ const AddBlog = () => {
   );
 };
 
-export default AddBlog;
+export default UpdateBlog;
