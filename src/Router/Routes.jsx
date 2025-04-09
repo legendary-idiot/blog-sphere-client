@@ -11,6 +11,7 @@ import ErrorPage from "./../Pages/ErrorPage";
 import MyBlogs from "../Pages/MyBlogs";
 import UpdateBlog from "../Pages/UpdateBlog";
 import Wishlist from "../Pages/Wishlist";
+import FeaturedBlogs from "../Pages/FeaturedBlogs";
 
 export const router = createBrowserRouter([
   {
@@ -52,8 +53,9 @@ export const router = createBrowserRouter([
           fetch(`http://localhost:3000/blogs/${params.id}`),
       },
       {
-        path: "/about",
-        element: <div>About</div>,
+        path: "/featured-blogs",
+        element: <FeaturedBlogs />,
+        loader: () => fetch("http://localhost:3000/featured-blogs"),
       },
       {
         path: "/wishlist",

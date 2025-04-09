@@ -2,12 +2,21 @@ import { useContext, useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import { AuthContext } from "./../Providers/AuthProvider";
 import toast from "react-hot-toast";
+import LoadingSpinner from "../Components/LoadingSpinner";
 
 const AllBlogs = () => {
   const blogs = useLoaderData();
   const { user } = useContext(AuthContext);
 
-  const handleWishlist = (blogId) => {
+  const handleWishlist = (blogId, title, cover, publishDate, author) => {
+    const blogData = {
+      blogId,
+      email: user.email,
+      postCover: cover,
+      title,
+      publishDate,
+      author,
+    };
     if (!user) {
       toast.error("Please login to add to wishlist");
       return;
@@ -17,12 +26,13 @@ const AllBlogs = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ blogId, email: user.email }),
+      body: JSON.stringify(blogData),
     })
       .then((response) => response.json())
       .then((data) => console.log(data))
       .catch((error) => console.log(error.message));
   };
+  if (blogs.length === 0) return <LoadingSpinner />;
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-11/12 mx-auto my-12">
       {blogs.map((blog, idx) => (
@@ -37,20 +47,29 @@ const AllBlogs = () => {
               className="rounded-md"
             />
           </figure>
+
           <div className="flex items-center gap-2 text-sm font-bold">
             <h2>{blog.username}</h2>
             <p className="text-gray-300">on {blog.publishingDate}</p>
           </div>
           <h2 className="text-2xl font-bold">{blog.postTitle}</h2>
           <p className="text-gray-300">
-            {blog.postDescription.slice(0, 101)}...
+            {blog.postDescription.slice(0, 80)}...
           </p>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 ">
             <Link to={`/blogs/${blog._id}`} className="btn btn-primary">
               Details
             </Link>
             <button
-              onClick={() => handleWishlist(blog._id)}
+              onClick={() =>
+                handleWishlist(
+                  blog._id,
+                  blog.postTitle,
+                  blog.postCover,
+                  blog.publishingDate,
+                  blog.username
+                )
+              }
               className="btn btn-secondary"
             >
               Add to Wishlist
