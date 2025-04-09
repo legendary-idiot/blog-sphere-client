@@ -1,3 +1,4 @@
+import AllPosts from "../Components/AllPosts";
 import Banner from "../Components/Banner";
 import TopicTags from "../Components/TopicTags";
 import Newsletter from "./../Components/Newsletter";
@@ -7,7 +8,7 @@ const Home = () => {
     <div>
       <Banner />
       <TopicTags />
-      <h3>All News</h3>
+      <AllPosts />
       <Newsletter />
     </div>
   );
