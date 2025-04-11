@@ -4,6 +4,7 @@ import DataTable, { createTheme } from "react-data-table-component";
 import { FaRegTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
 import LoadingSpinner from "../Components/LoadingSpinner";
+import { Link } from "react-router-dom";
 
 const Wishlist = () => {
   const { user } = useContext(AuthContext);
@@ -91,18 +92,26 @@ const Wishlist = () => {
     },
     {
       name: "Title",
-      selector: (row) => row.title,
-      wrap: "true",
       grow: 2,
+      selector: (row) => {
+        return (
+          <Link to={`/blogs/${row.blogId}`} className="link-info">
+            {row.title}
+          </Link>
+        );
+      },
+      wrap: "true",
       sortable: true,
     },
     {
       name: "Author",
       selector: (row) => row.author,
+      wrap: "true",
     },
     {
       name: "Published",
       selector: (row) => row.publishDate,
+      wrap: "true",
       sortable: true,
     },
     {

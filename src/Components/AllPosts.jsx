@@ -1,15 +1,26 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const AllPosts = () => {
   const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     fetch("http://localhost:3000/blogs")
       .then((res) => res.json())
-      .then((data) => setPosts(data));
+      .then((data) => {
+        setPosts(data);
+        setLoading(false);
+      });
   }, []);
 
+  if (loading)
+    return (
+      <div className="flex items-center justify-center xl:col-span-5">
+        <span className="loading loading-dots loading-xl"></span>
+      </div>
+    );
   return (
-    <div className="w-11/12 mx-auto my-10">
+    <div className="xl:col-span-5">
       {[...posts].slice(0, 10).map((post) => (
         <div
           key={post._id}
@@ -27,9 +38,11 @@ const AllPosts = () => {
             </p>
             <h2 className="text-xl font-bold">{post.postTitle}</h2>
             <p className="text-gray-300">
-              {post.postDescription.slice(0, 150)}...
+              {post.postDescription.slice(0, 140)}...
             </p>
-            <button className="btn btn-primary">Read More</button>
+            <Link to={`/blogs/${post._id}`} className="btn btn-primary">
+              Read More
+            </Link>
           </div>
         </div>
       ))}

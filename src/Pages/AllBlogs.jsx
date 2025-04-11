@@ -9,6 +9,10 @@ const AllBlogs = () => {
   const { user } = useContext(AuthContext);
 
   const handleWishlist = (blogId, title, cover, publishDate, author) => {
+    if (!user) {
+      toast.error("Please login to add to wishlist");
+      return;
+    }
     const blogData = {
       blogId,
       email: user.email,
@@ -17,10 +21,7 @@ const AllBlogs = () => {
       publishDate,
       author,
     };
-    if (!user) {
-      toast.error("Please login to add to wishlist");
-      return;
-    }
+
     fetch("http://localhost:3000/wishlists", {
       method: "POST",
       headers: {
@@ -29,8 +30,8 @@ const AllBlogs = () => {
       body: JSON.stringify(blogData),
     })
       .then((response) => response.json())
-      .then((data) => console.log(data))
-      .catch((error) => console.log(error.message));
+      .then((data) => toast.success("Added to wishlist"))
+      .catch((error) => toast.error("Already in wishlist"));
   };
   if (blogs.length === 0) return <LoadingSpinner />;
   return (

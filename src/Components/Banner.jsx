@@ -67,34 +67,13 @@ const Banner = () => {
                 <h2 className="text-white text-2xl sm:text-3xl font-bold">
                   {blog.postTitle}
                 </h2>
-                <Link
-                  to={`/blogs/${blog._id}`}
-                  className="btn btn-primary text-white"
-                >
+                <Link to={`/blogs/${blog._id}`} className="btn btn-outline">
                   View Details
                 </Link>
               </div>
             </div>
           </div>
         ))}
-        {/* <div className="size-20 bg-amber-300 text-black text-2xl h-40">
-          <h3>1</h3>
-        </div>
-        <div className="size-20 bg-amber-300 text-black text-2xl h-40">
-          <h3>2</h3>
-        </div>
-        <div className="size-20 bg-amber-300 text-black text-2xl h-40">
-          <h3>3</h3>
-        </div>
-        <div className="size-20 bg-amber-300 text-black text-2xl h-40">
-          <h3>4</h3>
-        </div>
-        <div className="size-20 bg-amber-300 text-black text-2xl h-40">
-          <h3>5</h3>
-        </div>
-        <div className="size-20 bg-amber-300 text-black text-2xl h-40">
-          <h3>6</h3>
-        </div> */}
       </Slider>
     </div>
   );
