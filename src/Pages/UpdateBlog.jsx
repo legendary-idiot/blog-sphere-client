@@ -52,10 +52,11 @@ const UpdateBlog = () => {
   return (
     <div className="my-8">
       <div className="space-y-4">
-        <h2 className="text-2xl font-bold text-center">Add Post to the Blog</h2>
+        <h2 className="text-2xl font-bold text-center">Update Your Blog</h2>
         <p className="text-base w-[90%] sm:w-[70%] mx-auto text-center">
-          Share your gaming wisdom with the community! Write your review, rate
-          the game, and help others discover their next great adventure!
+          Revise and refine your content with ease! Make changes to your
+          published posts effortlessly. Edit, enhance, and keep your audience
+          engaged with fresh updates.
         </p>
       </div>
 

@@ -57,11 +57,13 @@ const Login = () => {
   return (
     <div className="my-8">
       <div className="space-y-4">
-        <h2 className="text-2xl font-bold text-center">Welcome Back, Gamer!</h2>
+        <h2 className="text-2xl font-bold text-center">
+          Welcome Back, Blogger!
+        </h2>
         <p className="text-base w-[90%] sm:w-[70%] mx-auto text-center">
-          Log in to pick up where you left off—exploring game reviews, sharing
-          your insights, and connecting with our passionate gaming community.
-          Let's continue the adventure!
+          Access your personalized blogging experience on BlogSphere! Log in to
+          manage your blogs, explore your wishlists, and connect with a world of
+          inspiring content.
         </p>
       </div>
 

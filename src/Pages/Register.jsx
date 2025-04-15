@@ -57,12 +57,12 @@ const Register = () => {
     <div className="my-8">
       <div className="space-y-4">
         <h2 className="text-2xl font-bold text-center">
-          Join the Chill Gamer Community!
+          Join the BlogSphere Community!
         </h2>
         <p className="text-base w-[90%] sm:w-[70%] mx-auto text-center">
-          Join the Chill Gamer family and be a part of our thriving community by
-          writing reviews, rating your favorite games, and discovering new
-          gaming experiences with like-minded players.
+          Join the BlogSphere community and start your blogging journey today!
+          Create an account to share your stories, manage your posts, and
+          connect with fellow writers and readers around the world.
         </p>
       </div>
 

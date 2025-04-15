@@ -69,7 +69,7 @@ const MyBlogs = () => {
   return (
     <div className="w-11/12 md:w-8/12 mx-auto my-12">
       <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-center">
-        Your Blogs
+        My Blogs
       </h2>
       {blogs.length === 0 ? (
         <h2 className="text-xl font-semibold text-center text-amber-600">

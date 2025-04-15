@@ -157,7 +157,14 @@ const Wishlist = () => {
 
   return (
     <div className="w-11/12 mx-auto my-12">
-      <h2>All The Wishlisted Item Will Be Displayed Here</h2>
+      <div className="space-y-4 mb-8">
+        <h2 className="text-2xl font-bold text-center">My Wishlists</h2>
+        <p className="text-base w-[90%] sm:w-[70%] mx-auto text-center">
+          Keep track of your favorite blog posts and must-read articles! My
+          Wishlists page lets you organize and revisit content that inspires,
+          informs, and excites you.
+        </p>
+      </div>
       <DataTable
         columns={columns}
         data={data}

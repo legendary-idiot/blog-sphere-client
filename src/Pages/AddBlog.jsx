@@ -52,12 +52,13 @@ const AddBlog = () => {
       });
   };
   return (
-    <div className="my-8">
+    <div className="my-12">
       <div className="space-y-4">
         <h2 className="text-2xl font-bold text-center">Add Post to the Blog</h2>
         <p className="text-base w-[90%] sm:w-[70%] mx-auto text-center">
-          Share your gaming wisdom with the community! Write your review, rate
-          the game, and help others discover their next great adventure!
+          Share your stories and insights with the world! Craft your blog post,
+          add your unique touch, and captivate your audience. Start sharing
+          today!
         </p>
       </div>
 

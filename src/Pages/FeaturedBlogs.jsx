@@ -79,7 +79,15 @@ const FeaturedBlogs = () => {
 
   return (
     <div className="w-11/12 mx-auto my-12">
-      <h2>All The Featured Blogs Will Be Displayed Here</h2>
+      <div className="space-y-4 mb-8">
+        <h2 className="text-2xl font-bold text-center">Featured Blogs</h2>
+        <p className="text-base w-[90%] sm:w-[70%] mx-auto text-center">
+          Discover standout blog posts handpicked for their creativity, insight,
+          and quality. This page showcases the best content from our vibrant
+          community of writers. Dive into trending stories and hidden gems
+          today!
+        </p>
+      </div>
       <DataTable
         columns={columns}
         data={data}
