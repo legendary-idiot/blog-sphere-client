@@ -31,7 +31,7 @@ const Banner = () => {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    fetch("http://localhost:3000/featured-blogs")
+    fetch("https://server-blog-sphere.vercel.app/featured-blogs")
       .then((res) => res.json())
       .then((data) => {
         setBlogs(data);

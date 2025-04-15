@@ -28,15 +28,16 @@ const UpdateBlog = () => {
       username,
     };
 
-    fetch(`http://localhost:3000/blogs/${data._id}`, {
+    fetch(`https://server-blog-sphere.vercel.app/blogs/${data._id}`, {
       method: "PUT",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(postData),
     })
       .then((response) => response.json())
-      .then((data) => {
+      .then(() => {
         e.target.reset();
         Swal.fire({
           title: "Post Updated Successfully!",

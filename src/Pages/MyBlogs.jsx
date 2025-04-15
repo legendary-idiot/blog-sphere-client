@@ -1,29 +1,35 @@
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Providers/AuthProvider";
-import toast from "react-hot-toast";
 import { FaEdit } from "react-icons/fa";
 import { RiDeleteBinLine } from "react-icons/ri";
 import Swal from "sweetalert2";
 import LoadingSpinner from "../Components/LoadingSpinner";
 import { Link } from "react-router-dom";
 import { Tooltip } from "react-tooltip";
+import useAxiosSecure from "../CustomHooks/useAxiosSecure";
 
 const MyBlogs = () => {
   const { user } = useContext(AuthContext);
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
+  const axiosSecure = useAxiosSecure();
+
+  const fetchBlogs = useCallback(async () => {
+    try {
+      const { data } = await axiosSecure.get(`/blogs/user/${user.email}`);
+      setBlogs(data);
+    } catch (error) {
+      console.error("Error fetching blogs:", error);
+    } finally {
+      setLoading(false);
+    }
+  }, [axiosSecure, user.email]);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/blogs/user/${user.email}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setBlogs(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        toast.error("Sorry. Some error occurred", error);
-      });
-  }, [user.email]);
+    if (user?.email) {
+      fetchBlogs();
+    }
+  }, [fetchBlogs, user?.email]);
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -36,11 +42,13 @@ const MyBlogs = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/blogs/${id}`, {
+        fetch(`https://server-blog-sphere.vercel.app/blogs/${id}`, {
           method: "DELETE",
+          credentials: "include",
           headers: {
             "Content-Type": "application/json",
           },
+          body: JSON.stringify({ authorEmail: user.email }),
         })
           .then((response) => response.json())
           .then(() => {
@@ -49,6 +57,7 @@ const MyBlogs = () => {
               text: "Blog has been deleted.",
               icon: "success",
             });
+            fetchBlogs();
           })
           .catch((error) => {
             console.error("Error:", error);

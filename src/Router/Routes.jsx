@@ -36,12 +36,14 @@ export const router = createBrowserRouter([
         path: "/category/:category",
         element: <Category />,
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/blogs?category=${params.category}`),
+          fetch(
+            `https://server-blog-sphere.vercel.app/blogs?category=${params.category}`
+          ),
       },
       {
         path: "/all-blogs",
         element: <AllBlogs />,
-        loader: () => fetch("http://localhost:3000/blogs"),
+        loader: () => fetch("https://server-blog-sphere.vercel.app/blogs"),
       },
       {
         path: "/my-blogs",
@@ -59,7 +61,7 @@ export const router = createBrowserRouter([
           </Private>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/blogs/${params.id}`),
+          fetch(`https://server-blog-sphere.vercel.app/blogs/${params.id}`),
       },
       {
         path: "/update-blog/:id",
@@ -69,7 +71,7 @@ export const router = createBrowserRouter([
           </Private>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/blogs/${params.id}`),
+          fetch(`https://server-blog-sphere.vercel.app/blogs/${params.id}`),
       },
       {
         path: "/featured-blogs",
@@ -78,7 +80,8 @@ export const router = createBrowserRouter([
             <FeaturedBlogs />
           </Private>
         ),
-        loader: () => fetch("http://localhost:3000/featured-blogs"),
+        loader: () =>
+          fetch("https://server-blog-sphere.vercel.app/featured-blogs"),
       },
       {
         path: "/wishlist",

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import { AuthContext } from "./../Providers/AuthProvider";
 import toast from "react-hot-toast";
@@ -15,29 +15,32 @@ const AllBlogs = () => {
     }
     const blogData = {
       blogId,
-      email: user.email,
+      wishlistUserEmail: user.email,
       postCover: cover,
       title,
       publishDate,
       author,
     };
 
-    fetch("http://localhost:3000/wishlists", {
+    fetch("https://server-blog-sphere.vercel.app/wishlists", {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(blogData),
     })
       .then((response) => response.json())
-      .then((data) => toast.success("Added to wishlist"))
-      .catch((error) => toast.error("Already in wishlist"));
+      .then(() => toast.success("Added to wishlist"))
+      .catch(() => {
+        toast.error("Already in wishlist");
+      });
   };
   if (blogs.length === 0) return <LoadingSpinner />;
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-11/12 mx-auto my-12">
       {blogs.map((blog, idx) => (
-        <div key={idx} className="space-y-4">
+        <div key={idx} className="space-y-4 flex flex-col justify-between">
           <figure className="relative rounded-md hover:scale-105 hover:transition-transform duration-300">
             <figcaption className="absolute top-2 left-2 px-2 py-1 text-sm uppercase font-medium bg-white text-black rounded-md">
               {blog.category}
@@ -48,7 +51,6 @@ const AllBlogs = () => {
               className="rounded-md"
             />
           </figure>
-
           <div className="flex items-center gap-2 text-sm font-bold">
             <h2>{blog.username}</h2>
             <p className="text-gray-300">on {blog.publishingDate}</p>

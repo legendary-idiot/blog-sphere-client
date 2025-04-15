@@ -79,9 +79,31 @@ const AuthProvider = ({ children }) => {
       if (currentUser) {
         // User is signed in.
         setUser(currentUser);
+        fetch(`https://server-blog-sphere.vercel.app/jwt`, {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email: currentUser.email }),
+        })
+          .then((res) => res.json())
+          .then((data) => console.log(data))
+          .catch((error) => {
+            console.log("Error: ", error);
+          });
       } else {
         // User is signed out.
         setUser(null);
+        fetch("https://server-blog-sphere.vercel.app/logout", {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((res) => res.json())
+          .then((data) => console.log(data));
       }
       setLoading(false);
     });

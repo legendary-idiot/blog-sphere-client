@@ -5,7 +5,7 @@ const AllPosts = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    fetch("http://localhost:3000/blogs")
+    fetch("https://server-blog-sphere.vercel.app/blogs")
       .then((res) => res.json())
       .then((data) => {
         setPosts(data);

@@ -30,11 +30,12 @@ const AddBlog = () => {
       username,
     };
 
-    fetch("http://localhost:3000/blogs", {
+    fetch("https://server-blog-sphere.vercel.app/blogs", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
       body: JSON.stringify(postData),
     })
       .then((response) => response.json())

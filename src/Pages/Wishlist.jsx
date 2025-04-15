@@ -1,29 +1,37 @@
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Providers/AuthProvider";
 import DataTable, { createTheme } from "react-data-table-component";
 import { FaRegTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
 import LoadingSpinner from "../Components/LoadingSpinner";
 import { Link } from "react-router-dom";
+import useAxiosSecure from "../CustomHooks/useAxiosSecure";
 
 const Wishlist = () => {
   const { user } = useContext(AuthContext);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const axiosSecure = useAxiosSecure();
 
-  // Fetching Data
-  const fetchData = () => {
-    fetch(`http://localhost:3000/wishlists/?email=${user?.email}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data);
-        setLoading(false);
-      })
-      .catch((err) => console.log(err));
-  };
+  const fetchWishlist = useCallback(async () => {
+    try {
+      const { data } = await axiosSecure.get(
+        `/wishlists/?email=${user?.email}`,
+        { withCredentials: true }
+      );
+      setData(data);
+    } catch (error) {
+      console.error("Error fetching blogs:", error);
+    } finally {
+      setLoading(false);
+    }
+  }, [axiosSecure, user?.email]);
+
   useEffect(() => {
-    fetchData();
-  }, [user?.email]);
+    if (user.email) {
+      fetchWishlist();
+    }
+  }, [user.email, fetchWishlist]);
 
   // Delete from Wishlist
   const handleDelete = (wishlistID) => {
@@ -37,8 +45,9 @@ const Wishlist = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/wishlists/${wishlistID}`, {
+        fetch(`https://server-blog-sphere.vercel.app/wishlists/${wishlistID}`, {
           method: "DELETE",
+          credentials: "include",
         })
           .then((res) => res.json())
           .then((data) => {
@@ -48,7 +57,7 @@ const Wishlist = () => {
                 text: "Blog has been removed from Wishlist",
                 icon: "success",
               });
-              fetchData();
+              fetchWishlist();
             }
           })
           .catch((err) => console.log(err));
