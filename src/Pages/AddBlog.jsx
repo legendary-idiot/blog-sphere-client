@@ -39,7 +39,7 @@ const AddBlog = () => {
       body: JSON.stringify(postData),
     })
       .then((response) => response.json())
-      .then((data) => {
+      .then(() => {
         e.target.reset();
         Swal.fire({
           title: "Post Added Successfully!",
