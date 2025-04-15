@@ -6,8 +6,12 @@ import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import Swal from "sweetalert2";
 
 const Login = () => {
-  const { signInWithEmailPass, signInWithGoogleAuth, resetPassword } =
-    useContext(AuthContext);
+  const {
+    signInWithEmailPass,
+    signInWithGoogleAuth,
+    resetPassword,
+    setLoading,
+  } = useContext(AuthContext);
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
@@ -30,6 +34,7 @@ const Login = () => {
             title: "Invalid Credential!",
             icon: "error",
           });
+          setLoading(false);
         }
       });
   };

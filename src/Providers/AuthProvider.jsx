@@ -120,6 +120,7 @@ const AuthProvider = ({ children }) => {
     resetPassword,
     user,
     loading,
+    setLoading,
     error,
     setError,
   };
